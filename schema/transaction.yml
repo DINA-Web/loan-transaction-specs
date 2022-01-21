@@ -1,0 +1,233 @@
+paths:
+  /v1/transaction:
+    get:
+      tags:
+        - Transaction
+      summary: List transactions
+      operationId: getTransactions
+      description: List all transactions
+      parameters:
+        - in: query
+          name: sort
+          description: optional sort order string, such as descending, denoted by "-"
+          schema:
+            type: string
+        - in: query
+          name: page[offset]
+          description: number of records to skip when paging
+          schema:
+            type: integer
+            format: int32
+        - in: query
+          name: page[limit]
+          description: maximum number of records to return when paging
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+      responses:
+        '200':
+          description: Transactions satifying the query restrictions
+          content:
+            application/vnd.api+json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Transaction'                
+        '404':
+          description: Transaction not found
+    post:
+      tags:
+        - Transaction
+      summary: Add a Transaction
+      operationId: addTransaction
+      description: Add a Transaction
+      responses:
+        '201':
+          description: Transaction created
+        '422':
+          description: Data integrity violation          
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/NewTransaction'
+        description: Transaction to add
+  /v1/transaction/{Id}:
+    get:
+      tags:
+        - Transaction
+      summary: Get a Transaction
+      description: Return a single Transaction
+      operationId: getTransactionById
+      parameters:
+        - name: Id
+          in: path
+          description: ID of Transaction to return
+          required: true
+          schema:
+            type: string
+            format: uuid            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/vnd.api+json:
+              schema:          
+                $ref: '#/components/schemas/Transaction'
+        '400':
+          description: Not a valid uuid                
+        '404':
+          description: Person not found          
+    patch:
+      tags:
+        - Transaction
+      summary: Update a Transaction
+      operationId: updateTransaction
+      description: Update a Transaction
+      parameters:
+        - name: Id
+          in: path
+          description: Transaction id to patch
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Transaction updated
+        '400':
+          description: invalid input, object invalid
+      requestBody:
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+        description: Transaction to add
+    delete:
+      tags:
+        - Transaction
+      summary: Delete a Transaction
+      operationId: deleteTransaction
+      description: Delete a Transaction
+      parameters:
+        - name: Id
+          in: path
+          description: Transaction id to delete
+          required: true
+          schema:
+            type: string
+            format: uuid            
+      responses:
+        '200':
+          description: Transaction deleted
+        '400':
+          description: Not a valid uuid          
+        '404':
+          description: Transaction not found       
+components:
+  schemas:
+    Transaction:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              format: uuid
+              example: d290f1ee-6c54-4b01-90e6-d701748f0851
+              description: Identifier of the object as UUID
+          allOf:
+            - $ref: '#/components/schemas/CommonTransaction'
+
+    NewTransaction:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/CommonTransaction'
+
+    CommonTransaction:
+      type: object
+      required:
+        - type
+        - attributes       
+      properties:            
+        type:
+          enum: [transaction]      
+          description: The type of data being returned.
+        attributes:
+          type: object
+          required:
+            - group
+            - email
+          properties:
+            transactionNumber:
+              type: string
+              description: Numbner assigned to the transaction
+              example: L-2021-012
+            materialDirection:
+              enum: [IN, OUT]
+            materialToBeReturned:
+              type: boolean
+            group:
+              type: string
+              description: group owning the object
+            transactionType:
+              nullable: true
+              type: string
+              description: Type of transaction
+              example: Loan
+            otherIdentifiers:
+              type: array
+              description: Other identifiers used to identify the transaction
+              items:
+                type: string
+              example: ["P18-PJDHS","84784629058-129037"]
+            status:
+              nullable: true
+              type: string
+              description: Current Status of the transaction
+            purpose:
+              nullable: true
+              type: string
+              description: Purpose of the transaction. Why the transaciton is happening.
+            openedDate:
+              type: string
+              format: date
+              nullable: true
+              description: The date on which the transaction opened.
+            closedDate:
+              type: string
+              format: date
+              nullable: true
+              description: The date on which the transaction closed.
+            dueDate:
+              type: string
+              format: date
+              nullable: true
+              description: The date on which the transaction is due.
+            remarks:
+              type: string
+              nullable: true
+              description: Remarks about the transaction.
+            createdBy:
+              type: string      
+              readOnly: true
+              description: authenticated user who create the transaction record
+              example: test user
+            createdOn:              
+              type: string
+              format: date-time                            
+              readOnly: true
+              description: "date and time when the transaction record was created in ISO format"
+              example:  "1985-04-12T23:20:50.52Z"
