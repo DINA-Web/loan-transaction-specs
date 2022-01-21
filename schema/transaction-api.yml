@@ -12,8 +12,8 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /v1/metadata:
+  /v1/transaction:
     $ref: 'transaction.yml#/paths/~1v1~transaction'
-  /v1/metadata/{Id}:
+  /v1/transaction/{Id}:
     $ref: 'transaction.yml#/paths/~1v1~transaction~1{Id}'
     
