@@ -13,7 +13,7 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
   /v1/transaction:
-    $ref: 'transaction.yml#/paths/~1v1~transaction'
+    $ref: 'transaction.yml#/paths/~1v1~1transaction'
   /v1/transaction/{Id}:
-    $ref: 'transaction.yml#/paths/~1v1~transaction~1{Id}'
+    $ref: 'transaction.yml#/paths/~1v1~1transaction~1{Id}'
     
