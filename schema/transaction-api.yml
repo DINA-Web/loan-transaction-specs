@@ -1,0 +1,19 @@
+openapi: 3.0.0
+servers:
+  - description: DINA
+    url: https://virtserver.dina-project.net/
+info:
+  description: Transaction API Schema
+  version: "0.1.0"
+  title: Transaction Schema - DRAFT
+  contact:
+    email: dina-aafc@canada.ca
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /v1/metadata:
+    $ref: 'transaction.yml#/paths/~1v1~transaction'
+  /v1/metadata/{Id}:
+    $ref: 'transaction.yml#/paths/~1v1~transaction~1{Id}'
+    
