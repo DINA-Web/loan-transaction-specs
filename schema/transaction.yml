@@ -169,7 +169,7 @@ components:
           type: object
           required:
             - group
-            - email
+            - materialDirection
           properties:
             transactionNumber:
               type: string
