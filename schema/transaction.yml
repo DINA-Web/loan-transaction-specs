@@ -221,6 +221,7 @@ components:
               nullable: true
               description: Remarks about the transaction.
             shipment:
+              nullable: true
               allOf:
                 - $ref: '#/components/schemas/Shipment'
             createdBy:
@@ -267,6 +268,7 @@ components:
           type: string
           nullable: true
         address:
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Address'
     Address:
