@@ -160,8 +160,8 @@ components:
       type: object
       required:
         - type
-        - attributes       
-      properties:            
+        - attributes
+      properties:
         type:
           enum: [transaction]      
           description: The type of data being returned.
@@ -220,8 +220,12 @@ components:
               type: string
               nullable: true
               description: Remarks about the transaction.
+            shipment:
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/Shipment'
             createdBy:
-              type: string      
+              type: string
               readOnly: true
               description: authenticated user who create the transaction record
               example: test user
@@ -231,3 +235,74 @@ components:
               readOnly: true
               description: "date and time when the transaction record was created in ISO format"
               example:  "1985-04-12T23:20:50.52Z"
+    Shipment:
+      type: object
+      properties:
+        contentRemarks:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+          description: "Monetary value of the shipment. Must include the currency in the currency property"
+        currency:
+          type: string
+          nullable: true
+          description: "ISO 4217 currency code"
+          minLength: 3
+          maxLength: 3
+        itemCount:
+          type: number
+          nullable: true
+        shippedOn:
+          type: string
+          format: date
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        packingMethod:
+          type: string
+          nullable: true
+        trackingNumber:
+          type: string
+          nullable: true
+        address:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/Address'
+    Address:
+      type: object
+      properties:
+        receiverName:
+          type: string
+          nullable: true
+          maxLength: 150
+        companyName:
+          type: string
+          nullable: true
+          maxLength: 150
+        addressLine1:
+          type: string
+          nullable: true
+          maxLength: 150
+        addressLine2:
+          type: string
+          nullable: true
+          maxLength: 150
+        city:
+          type: string
+          nullable: true
+          maxLength: 150
+        provinceState:
+          type: string
+          nullable: true
+          maxLength: 150
+        zipCode:
+          type: string
+          nullable: true
+          maxLength: 25
+        country:
+          type: string
+          nullable: true
+          maxLength: 50
