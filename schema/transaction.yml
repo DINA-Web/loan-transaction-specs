@@ -270,7 +270,7 @@ components:
           nullable: true
         address:
           type: object
-           nullable: true
+          nullable: true
           allOf:
             - $ref: '#/components/schemas/Address'
     Address:
