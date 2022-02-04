@@ -256,7 +256,7 @@ components:
           nullable: true
         shippedOn:
           type: string
-          format: date-time
+          format: date
           nullable: true
         status:
           type: string
