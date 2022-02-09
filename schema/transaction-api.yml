@@ -16,4 +16,7 @@ paths:
     $ref: 'transaction.yml#/paths/~1v1~1transaction'
   /v1/transaction/{Id}:
     $ref: 'transaction.yml#/paths/~1v1~1transaction~1{Id}'
-    
+  /v1/managed-attribute:
+    $ref: 'managed-attribute.yml#/paths/~1v1~1managed-attribute'    
+  /v1/managed-attribute/{Id}:
+    $ref: 'managed-attribute.yml#/paths/~1v1~1managed-attribute~1{Id}'
