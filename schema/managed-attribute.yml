@@ -175,13 +175,12 @@ components:
                 name:
                   type: string
                   description: name of the managed attribute
-                  example: 
-                    specimenView
+                group:
+                  type: string
+                  description: name of the managed attribute
                 key:
                   type: string
                   description: key of the managed attribute
-                  example: 
-                    specimen_view
                 managedAttributeType:
                   description: type of the managed attribute          
                   enum: [
@@ -196,7 +195,7 @@ components:
                       - type: integer
                   example: 
                     - dorsal
-                    - 1   
+                    - 1
                 multilingualDescription:
                   type: object
                   nullable: true
