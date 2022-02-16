@@ -241,7 +241,6 @@ components:
               example:  "1985-04-12T23:20:50.52Z"
         relationships:
           type: object
-          nullable: true
           properties:
             involvedAgents:
               type: object
@@ -335,9 +334,6 @@ components:
     AgentRoles:
       type: array
       description: "Agent role is used to store the roles a particular agent has performed in the transaction."
-      required:
-        - agent
-        - roles
       properties:
         agent:
           type: string
