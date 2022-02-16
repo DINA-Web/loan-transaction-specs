@@ -241,11 +241,10 @@ components:
               example:  "1985-04-12T23:20:50.52Z"
         relationships:
           type: object
+          nullable: true
           properties:
             involvedAgents:
               type: object
-              required:
-                - data
               properties:
                 data:
                   type: object
