@@ -248,18 +248,20 @@ components:
               nullable: true
               properties:
                 data:
-                  type: object
-                  required:
-                    - type
-                    - id
-                  properties:
-                    type:
-                      enum: [person]
-                    id:
-                      type: string
-                      format: uuid
-                      description: agent uuid found in a agentRole
-                      example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - type
+                      - id
+                    properties:
+                      type:
+                        enum: [person]
+                      id:
+                        type: string
+                        format: uuid
+                        description: agent uuid found in a agentRole
+                        example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
     Shipment:
       type: object
       properties:
