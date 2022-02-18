@@ -34,7 +34,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: '#/components/schemas/Transaction'                
+                  $ref: '#/components/schemas/TransactionResponse'                
         '404':
           description: Transaction not found
     post:
@@ -46,13 +46,17 @@ paths:
       responses:
         '201':
           description: Transaction created
+          content:
+            application/vnd.api+json:
+              schema:          
+                $ref: '#/components/schemas/TransactionResponse'
         '422':
           description: Data integrity violation          
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/NewTransaction'
+              $ref: '#/components/schemas/TransactionRequest'
         description: Transaction to add
   /v1/transaction/{Id}:
     get:
@@ -75,7 +79,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:          
-                $ref: '#/components/schemas/Transaction'
+                $ref: '#/components/schemas/TransactionResponse'
         '400':
           description: Not a valid uuid                
         '404':
@@ -97,13 +101,17 @@ paths:
       responses:
         '200':
           description: Transaction updated
+          content:
+            application/vnd.api+json:
+              schema:          
+                $ref: '#/components/schemas/TransactionResponse'
         '400':
           description: invalid input, object invalid
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: '#/components/schemas/TransactionRequest'
         description: Transaction to add
     delete:
       tags:
@@ -128,7 +136,7 @@ paths:
           description: Transaction not found       
 components:
   schemas:
-    Transaction:
+    TransactionResponse:
       type: object
       required:
         - data
@@ -145,8 +153,9 @@ components:
               description: Identifier of the object as UUID
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
+            - $ref: '#/components/schemas/ImmutableRelationships'
 
-    NewTransaction:
+    TransactionRequest:
       type: object
       required:
         - data
@@ -239,6 +248,10 @@ components:
               readOnly: true
               description: "date and time when the transaction record was created in ISO format"
               example:  "1985-04-12T23:20:50.52Z"
+              
+    ImmutableRelationships:
+      type: object
+      properties:
         relationships:
           type: object
           nullable: true
