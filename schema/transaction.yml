@@ -34,7 +34,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: '#/components/schemas/TransactionResponse'                
+                  $ref: '#/components/schemas/Transaction'                
         '404':
           description: Transaction not found
     post:
@@ -49,14 +49,14 @@ paths:
           content:
             application/vnd.api+json:
               schema:          
-                $ref: '#/components/schemas/TransactionResponse'
+                $ref: '#/components/schemas/Transaction'
         '422':
           description: Data integrity violation          
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/TransactionRequest'
+              $ref: '#/components/schemas/NewTransaction'
         description: Transaction to add
   /v1/transaction/{Id}:
     get:
@@ -79,7 +79,7 @@ paths:
           content:
             application/vnd.api+json:
               schema:          
-                $ref: '#/components/schemas/TransactionResponse'
+                $ref: '#/components/schemas/Transaction'
         '400':
           description: Not a valid uuid                
         '404':
@@ -104,14 +104,14 @@ paths:
           content:
             application/vnd.api+json:
               schema:          
-                $ref: '#/components/schemas/TransactionResponse'
+                $ref: '#/components/schemas/Transaction'
         '400':
           description: invalid input, object invalid
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/TransactionRequest'
+              $ref: '#/components/schemas/NewTransaction'
         description: Transaction to add
     delete:
       tags:
@@ -136,7 +136,7 @@ paths:
           description: Transaction not found       
 components:
   schemas:
-    TransactionResponse:
+    Transaction:
       type: object
       required:
         - data
@@ -155,7 +155,7 @@ components:
             - $ref: '#/components/schemas/CommonTransaction'
             - $ref: '#/components/schemas/ImmutableRelationships'
 
-    TransactionRequest:
+    NewTransaction:
       type: object
       required:
         - data
