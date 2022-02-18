@@ -224,6 +224,11 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/Shipment'
+            managedAttributes:
+              type: object
+              description: The manage attribute, with key and value pair. A managedAttributes' entry key is expected to be set as a managed attribute's key.
+              additionalProperties:
+                type: string
             createdBy:
               type: string
               readOnly: true
