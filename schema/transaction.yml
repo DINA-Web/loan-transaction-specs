@@ -237,6 +237,11 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/AgentRoles'
+            managedAttributes:
+              type: object
+              description: The manage attribute, with key and value pair. A managedAttributes' entry key is expected to be set as a managed attribute's key.
+              additionalProperties:
+                type: string
             createdBy:
               type: string
               readOnly: true
@@ -257,6 +262,7 @@ components:
           nullable: true
           properties:
             involvedAgents:
+              description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
               type: object
               nullable: true
               properties:
