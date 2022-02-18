@@ -46,6 +46,10 @@ paths:
       responses:
         '201':
           description: Transaction created
+          content:
+            application/vnd.api+json:
+              schema:          
+                $ref: '#/components/schemas/Transaction'
         '422':
           description: Data integrity violation          
       requestBody:
@@ -97,13 +101,17 @@ paths:
       responses:
         '200':
           description: Transaction updated
+          content:
+            application/vnd.api+json:
+              schema:          
+                $ref: '#/components/schemas/Transaction'
         '400':
           description: invalid input, object invalid
       requestBody:
         content:
           application/vnd.api+json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: '#/components/schemas/NewTransaction'
         description: Transaction to add
     delete:
       tags:
@@ -145,6 +153,7 @@ components:
               description: Identifier of the object as UUID
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
+            - $ref: '#/components/schemas/ImmutableRelationships'
 
     NewTransaction:
       type: object
@@ -224,6 +233,10 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/Shipment'
+            agentRoles:
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/AgentRoles'
             managedAttributes:
               type: object
               description: The manage attribute, with key and value pair. A managedAttributes' entry key is expected to be set as a managed attribute's key.
@@ -240,6 +253,34 @@ components:
               readOnly: true
               description: "date and time when the transaction record was created in ISO format"
               example:  "1985-04-12T23:20:50.52Z"
+              
+    ImmutableRelationships:
+      type: object
+      properties:
+        relationships:
+          type: object
+          nullable: true
+          properties:
+            involvedAgents:
+              description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
+              type: object
+              nullable: true
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - type
+                      - id
+                    properties:
+                      type:
+                        enum: [person]
+                      id:
+                        type: string
+                        format: uuid
+                        description: agent uuid found in a agentRole
+                        example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
     Shipment:
       type: object
       properties:
@@ -311,3 +352,20 @@ components:
           type: string
           nullable: true
           maxLength: 50
+    AgentRoles:
+      type: array
+      description: "Agent role is used to store the roles a particular agent has performed in the transaction."
+      properties:
+        agent:
+          type: string
+          nullable: false
+          format: uuid
+          example: 3d89cfbb-a519-49d4-bc6b-9af8fb0f1fd2
+          description: Agent identifier.
+        roles:
+          type: array
+          nullable: false
+          items:
+            type: string
+            description: Roles associated to a particular agent.
+            example: ["Owner", "Borrower", "Prepared By"]
