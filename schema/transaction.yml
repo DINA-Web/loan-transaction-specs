@@ -151,9 +151,14 @@ components:
               format: uuid
               example: d290f1ee-6c54-4b01-90e6-d701748f0851
               description: Identifier of the object as UUID
+            relationships:
+              type: object
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/ImmutableRelationships'
+                - $ref: '#/components/schemas/MutableRelationships'              
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
-            - $ref: '#/components/schemas/ImmutableRelationships'
 
     NewTransaction:
       type: object
@@ -162,6 +167,12 @@ components:
       properties:
         data:
           type: object
+          properties:
+            relationships:
+              type: object
+              nullable: true
+              allOf:
+                - $ref: '#/components/schemas/MutableRelationships' 
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
 
@@ -253,34 +264,55 @@ components:
               readOnly: true
               description: "date and time when the transaction record was created in ISO format"
               example:  "1985-04-12T23:20:50.52Z"
-              
-    ImmutableRelationships:
+
+    # Relationships that can be updated and accessed.
+    MutableRelationships:
       type: object
       properties:
-        relationships:
+        attachment:
           type: object
           nullable: true
           properties:
-            involvedAgents:
-              description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
-              type: object
-              nullable: true
-              properties:
-                data:
-                  type: array
-                  items:
-                    type: object
-                    required:
-                      - type
-                      - id
-                    properties:
-                      type:
-                        enum: [person]
-                      id:
-                        type: string
-                        format: uuid
-                        description: agent uuid found in a agentRole
-                        example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - id
+                properties:
+                  type: 
+                    enum: [metadata]
+                  id:
+                    type: string
+                    format: uuid
+                    description: Unique identifier metadata for the resource
+                    example: de30ad6a-64a0-4425-9d2f-50230c06a209
+
+    # These relationships cannot updated, only accessed.
+    ImmutableRelationships:
+      type: object
+      properties:
+        involvedAgents:
+          description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
+          type: object
+          nullable: true
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - id
+                properties:
+                  type:
+                    enum: [person]
+                  id:
+                    type: string
+                    format: uuid
+                    description: agent uuid found in a agentRole
+                    example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
     Shipment:
       type: object
       properties:
