@@ -154,6 +154,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
             - $ref: '#/components/schemas/ImmutableRelationships'
+            - $ref: '#/components/schemas/MutableRelationships'
 
     NewTransaction:
       type: object
@@ -164,6 +165,7 @@ components:
           type: object
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
+            - $ref: '#/components/schemas/MutableRelationships'
 
     CommonTransaction:
       type: object
@@ -253,6 +255,11 @@ components:
               readOnly: true
               description: "date and time when the transaction record was created in ISO format"
               example:  "1985-04-12T23:20:50.52Z"
+
+    # Relationships that can be updated and accessed.
+    MutableRelationships:
+      type: object
+      properties:
         relationships:
           type: object
           nullable: true
@@ -278,6 +285,7 @@ components:
                         description: Unique identifier metadata for the resource
                         example: de30ad6a-64a0-4425-9d2f-50230c06a209
 
+    # These relationships cannot updated, only accessed.
     ImmutableRelationships:
       type: object
       properties:
