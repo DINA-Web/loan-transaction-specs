@@ -282,8 +282,7 @@ components:
                   - id
                 properties:
                   type: 
-                    type: string
-                    example: metadata
+                    enum: [metadata]
                   id:
                     type: string
                     format: uuid
