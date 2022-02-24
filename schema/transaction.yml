@@ -386,6 +386,7 @@ components:
           maxLength: 50
     AgentRoles:
       type: array
+      nullable: true
       description: "Agent role is used to store the roles a particular agent has performed in the transaction."
       properties:
         agent:
