@@ -253,7 +253,31 @@ components:
               readOnly: true
               description: "date and time when the transaction record was created in ISO format"
               example:  "1985-04-12T23:20:50.52Z"
-              
+        relationships:
+          type: object
+          nullable: true
+          properties:
+            attachment:
+              type: object
+              nullable: true
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - type
+                      - id
+                    properties:
+                      type: 
+                        type: string
+                        example: metadata
+                      id:
+                        type: string
+                        format: uuid
+                        description: Unique identifier metadata for the resource
+                        example: de30ad6a-64a0-4425-9d2f-50230c06a209
+
     ImmutableRelationships:
       type: object
       properties:
