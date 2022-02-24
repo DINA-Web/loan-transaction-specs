@@ -309,102 +309,105 @@ components:
                     description: agent uuid found in a agentRole
                     example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
     Shipment:
-      type: object
-      nullable: true
-      allOf:
-        - $ref: "#/components/schemas/Address"
-      properties:
-        contentRemarks:
-          type: string
-          nullable: true
-        value:
-          type: string
-          nullable: true
-          description: "Monetary value of the shipment. Must include the currency in the currency property"
-        currency:
-          type: string
-          nullable: true
-          description: "ISO 4217 currency code"
-          minLength: 3
-          maxLength: 3
-        itemCount:
-          type: number
-          nullable: true
-        shippedOn:
-          type: string
-          format: date
-          nullable: true
-        status:
-          type: string
-          nullable: true
-        packingMethod:
-          type: string
-          nullable: true
-        trackingNumber:
-          type: string
-          nullable: true
-    Address:
-      nullable: true
-      type: object
-      properties:
-        receiverName:
-          type: string
-          nullable: true
-          maxLength: 150
-        companyName:
-          type: string
-          nullable: true
-          maxLength: 150
-        addressLine1:
-          type: string
-          nullable: true
-          maxLength: 150
-        addressLine2:
-          type: string
-          nullable: true
-          maxLength: 150
-        city:
-          type: string
-          nullable: true
-          maxLength: 150
-        provinceState:
-          type: string
-          nullable: true
-          maxLength: 150
-        zipCode:
-          type: string
-          nullable: true
-          maxLength: 25
-        country:
-          type: string
-          nullable: true
-          maxLength: 50
-    AgentRoles:
-      type: array
-      nullable: true
-      description: "Agent role is used to store the roles a particular agent has performed in the transaction."
-      properties:
-        agent:
-          type: string
-          nullable: false
-          format: uuid
-          example: 3d89cfbb-a519-49d4-bc6b-9af8fb0f1fd2
-          description: Agent identifier.
-        roles:
-          type: array
-          nullable: false
-          items:
+      shipment: 
+        type: object
+        nullable: true
+        allOf:
+          - $ref: "#/components/schemas/Address"
+        properties:
+          contentRemarks:
             type: string
-            description: Roles associated to a particular agent.
-            example: ["Owner", "Borrower", "Prepared By"]
-        date:
-          type: string
-          format: date
-          nullable: true
-          description: Date associated with the agent role.
-        remarks:
-          type: string
-          nullable: true
-          description: Remarks regarding the agent role.
-          minLength: 0
-          maxLength: 1000
+            nullable: true
+          value:
+            type: string
+            nullable: true
+            description: "Monetary value of the shipment. Must include the currency in the currency property"
+          currency:
+            type: string
+            nullable: true
+            description: "ISO 4217 currency code"
+            minLength: 3
+            maxLength: 3
+          itemCount:
+            type: number
+            nullable: true
+          shippedOn:
+            type: string
+            format: date
+            nullable: true
+          status:
+            type: string
+            nullable: true
+          packingMethod:
+            type: string
+            nullable: true
+          trackingNumber:
+            type: string
+            nullable: true
+    Address:
+      address:
+        nullable: true
+        type: object
+        properties:
+          receiverName:
+            type: string
+            nullable: true
+            maxLength: 150
+          companyName:
+            type: string
+            nullable: true
+            maxLength: 150
+          addressLine1:
+            type: string
+            nullable: true
+            maxLength: 150
+          addressLine2:
+            type: string
+            nullable: true
+            maxLength: 150
+          city:
+            type: string
+            nullable: true
+            maxLength: 150
+          provinceState:
+            type: string
+            nullable: true
+            maxLength: 150
+          zipCode:
+            type: string
+            nullable: true
+            maxLength: 25
+          country:
+            type: string
+            nullable: true
+            maxLength: 50
+    AgentRoles:
+      agentRoles:
+        type: array
+        nullable: true
+        description: "Agent role is used to store the roles a particular agent has performed in the transaction."
+        properties:
+          agent:
+            type: string
+            nullable: false
+            format: uuid
+            example: 3d89cfbb-a519-49d4-bc6b-9af8fb0f1fd2
+            description: Agent identifier.
+          roles:
+            type: array
+            nullable: false
+            items:
+              type: string
+              description: Roles associated to a particular agent.
+              example: ["Owner", "Borrower", "Prepared By"]
+          date:
+            type: string
+            format: date
+            nullable: true
+            description: Date associated with the agent role.
+          remarks:
+            type: string
+            nullable: true
+            description: Remarks regarding the agent role.
+            minLength: 0
+            maxLength: 1000
