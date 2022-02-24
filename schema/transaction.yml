@@ -190,6 +190,9 @@ components:
           required:
             - group
             - materialDirection
+          allOf:
+            - $ref: '#/components/schemas/Shipment'
+            - $ref: '#/components/schemas/AgentRoles' 
           properties:
             transactionNumber:
               type: string
@@ -240,14 +243,6 @@ components:
               type: string
               nullable: true
               description: Remarks about the transaction.
-            shipment:
-              nullable: true
-              allOf:
-                - $ref: '#/components/schemas/Shipment'
-            agentRoles:
-              nullable: true
-              allOf:
-                - $ref: '#/components/schemas/AgentRoles'
             managedAttributes:
               type: object
               description: The manage attribute, with key and value pair. A managedAttributes' entry key is expected to be set as a managed attribute's key.
@@ -315,6 +310,9 @@ components:
                     example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
     Shipment:
       type: object
+      nullable: true
+      allOf:
+        - $ref: "#/components/schemas/Address"
       properties:
         contentRemarks:
           type: string
@@ -345,11 +343,8 @@ components:
         trackingNumber:
           type: string
           nullable: true
-        address:
-          nullable: true
-          allOf:
-            - $ref: '#/components/schemas/Address'
     Address:
+      nullable: true
       type: object
       properties:
         receiverName:
