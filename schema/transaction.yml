@@ -190,9 +190,6 @@ components:
           required:
             - group
             - materialDirection
-          allOf:
-            - $ref: '#/components/schemas/Shipment'
-            - $ref: '#/components/schemas/AgentRoles' 
           properties:
             transactionNumber:
               type: string
