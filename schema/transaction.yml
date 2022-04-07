@@ -155,8 +155,8 @@ components:
               type: object
               nullable: true
               allOf:
+                - $ref: '#/components/schemas/MetadataRelationship'
                 - $ref: '#/components/schemas/PersonRelationship'
-                - $ref: '#/components/schemas/MetadataRelationship'              
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
 
