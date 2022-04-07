@@ -347,6 +347,9 @@ components:
         trackingNumber:
           type: string
           nullable: true
+        shipmentRemarks:
+          type: string
+          nullable: true
         address:
           nullable: true
           allOf:
