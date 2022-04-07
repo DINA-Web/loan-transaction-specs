@@ -245,11 +245,10 @@ components:
               allOf:
                 - $ref: '#/components/schemas/Shipment'
             agentRoles:
-              type: array
+              type: object
               nullable: true
-              items:
-                allOf:
-                  - $ref: '#/components/schemas/AgentRoles'
+              allOf:
+                - $ref: '#/components/schemas/AgentRoles'
             managedAttributes:
               type: object
               description: The manage attribute, with key and value pair. A managedAttributes' entry key is expected to be set as a managed attribute's key.
