@@ -155,8 +155,8 @@ components:
               type: object
               nullable: true
               allOf:
-                - $ref: '#/components/schemas/ImmutableRelationships'
-                - $ref: '#/components/schemas/MutableRelationships'              
+                - $ref: '#/components/schemas/PersonRelationship'
+                - $ref: '#/components/schemas/MetadataRelationship'              
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
 
@@ -268,7 +268,7 @@ components:
               example:  "1985-04-12T23:20:50.52Z"
 
     # Relationships that can be updated and accessed.
-    MutableRelationships:
+    MetadataRelationship:
       type: object
       properties:
         attachment:
@@ -292,7 +292,7 @@ components:
                     example: de30ad6a-64a0-4425-9d2f-50230c06a209
 
     # These relationships cannot updated, only accessed.
-    ImmutableRelationships:
+    PersonRelationship:
       type: object
       properties:
         involvedAgents:
