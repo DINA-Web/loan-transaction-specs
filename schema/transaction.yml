@@ -172,7 +172,7 @@ components:
               type: object
               nullable: true
               allOf:
-                - $ref: '#/components/schemas/MutableRelationships' 
+                - $ref: '#/components/schemas/MetadataRelationship'
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
 
