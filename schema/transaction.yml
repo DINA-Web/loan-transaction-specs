@@ -173,6 +173,7 @@ components:
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/MetadataRelationship'
+                - $ref: '#/components/schemas/PersonRelationship'
           allOf:
             - $ref: '#/components/schemas/CommonTransaction'
 
