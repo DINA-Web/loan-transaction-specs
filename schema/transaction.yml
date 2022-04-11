@@ -280,7 +280,7 @@ components:
             involvedAgents:
               description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
               type: object
-              readonly: true
+              readOnly: true
               nullable: true
               properties:
                 data:
