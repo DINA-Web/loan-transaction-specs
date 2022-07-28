@@ -258,6 +258,25 @@ components:
           type: object
           nullable: true
           properties:
+            materialSamples:
+              type: object
+              nullable: true
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - type
+                      - id
+                    properties:
+                      type: 
+                        enum: [material-sample]
+                      id:
+                        type: string
+                        format: uuid
+                        description: Unique identifier for the material sample attached
+                        example: 11121721-21ba-4b90-bf17-f9d8ea67044d
             attachment:
               type: object
               nullable: true
