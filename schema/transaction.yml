@@ -288,6 +288,25 @@ components:
                     format: uuid
                     description: Unique identifier metadata for the resource
                     example: de30ad6a-64a0-4425-9d2f-50230c06a209
+        materialSamples:
+          type: object
+          nullable: true
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                required:
+                  - type
+                  - id
+                properties:
+                  type: 
+                    enum: [material-sample]
+                  id:
+                    type: string
+                    format: uuid
+                    description: Unique identifier for the material sample attached
+                    example: 11121721-21ba-4b90-bf17-f9d8ea67044d
 
     # These relationships cannot updated, only accessed.
     ImmutableRelationships:
