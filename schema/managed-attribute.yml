@@ -160,7 +160,7 @@ components:
               type: object
               required:
                 - name
-                - managedAttributeType
+                - vocabularyElementType
               properties:
                 createdBy:
                   type: string      
@@ -181,11 +181,13 @@ components:
                 key:
                   type: string
                   description: key of the managed attribute
-                managedAttributeType:
+                vocabularyElementType:
                   description: type of the managed attribute          
                   enum: [
                      STRING,
-                     INTEGER]
+                     INTEGER,
+                     DATE,
+                     BOOL]
                 acceptedValues:
                   type: array
                   description: accepted values of the named attribute (if any)      
