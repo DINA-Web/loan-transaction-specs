@@ -234,10 +234,19 @@ components:
                 - $ref: '#/components/schemas/Shipment'
             agentRoles:
               type: array
+              description: "Agent role is used to store the roles a particular agent has performed in the transaction."
               nullable: true
               items:
                 allOf:
                   - $ref: '#/components/schemas/AgentRoles'
+            involvedAgents:
+              type: array
+              description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
+              readOnly: true
+              nullable: true
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/InvolvedAgents'
             managedAttributes:
               type: object
               description: The manage attribute, with key and value pair. A managedAttributes' entry key is expected to be set as a managed attribute's key.
@@ -295,28 +304,7 @@ components:
                         type: string
                         format: uuid
                         description: Unique identifier metadata for the resource
-                        example: de30ad6a-64a0-4425-9d2f-50230c06a209            
-            involvedAgents:
-              description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
-              type: object
-              readOnly: true
-              nullable: true
-              properties:
-                data:
-                  type: array
-                  items:
-                    type: object
-                    required:
-                      - type
-                      - id
-                    properties:
-                      type:
-                        enum: [person]
-                      id:
-                        type: string
-                        format: uuid
-                        description: agent uuid found in a agentRole
-                        example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
+                        example: de30ad6a-64a0-4425-9d2f-50230c06a209
 
     Shipment:
       type: object
@@ -394,7 +382,6 @@ components:
           maxLength: 50
     AgentRoles:
       type: object
-      description: "Agent role is used to store the roles a particular agent has performed in the transaction."
       properties:
         agent:
           type: string
@@ -420,3 +407,18 @@ components:
           description: Remarks regarding the agent role.
           minLength: 0
           maxLength: 1000
+    InvolvedAgents:
+      description: Agent UUIDs found in the agent roles attribute. To edit the agents involved in roles, use the agentRoles attribute.
+      type: object
+      readOnly: true
+      required:
+        - type
+        - id
+      properties:
+        type:
+          enum: [person]
+        id:
+          type: string
+          format: uuid
+          description: agent uuid found in a agentRole
+          example: 83a511da-3fc0-4fa3-8d9f-eda5757d3929
