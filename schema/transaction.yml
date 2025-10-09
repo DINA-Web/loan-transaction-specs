@@ -229,7 +229,6 @@ components:
               nullable: true
               description: Remarks about the transaction.
             shipment:
-              description: "Monetary value of the shipment. Must include the currency in the currency property"
               nullable: true
               allOf:
                 - $ref: '#/components/schemas/Shipment'
@@ -316,6 +315,7 @@ components:
         value:
           type: string
           nullable: true
+          description: "Monetary value of the shipment. Must include the currency in the currency property"
         currency:
           type: string
           nullable: true
